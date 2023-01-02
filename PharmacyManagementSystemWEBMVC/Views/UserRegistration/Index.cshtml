@@ -1,0 +1,95 @@
+﻿@model IEnumerable<PharmacyManagementSystemWEBMVC.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<body id="background">
+    <div class=" background-image"></div>
+    <h1 style="text-align:center">Pharmacy Management System</h1>
+
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        #background {
+            background-image: url(/Pictures/img2.jpg);
+            background-position: inherit;
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 800px;
+            height: 500vh;
+        }
+
+        .Gowthami {
+            margin-left: 300px;
+            margin-top: 10px;
+        }
+    </style>
+
+</body>
+
+<body style="font-size:30px">
+    <center>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ConfirmPassword)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConfirmPassword)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.UserID }, new { onclick = "return confirm('Are you sure to delete?')" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        
+    </center>
+</body>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ab5b982cfc814ad8a8896c9c6ac027ea" Name="Diagram1">
+        <EntityTypeShape EntityType="PharmacyManagementSystemModel.Drug" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyManagementSystemModel.Order_Details" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyManagementSystemModel.SupplierInventory" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmacyManagementSystemModel.UserRegistration" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="PharmacyManagementSystemModel.FK__Drugs__Supplier___46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyManagementSystemModel.FK__Order_Det__DrugI__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmacyManagementSystemModel.FK__Order_Det__UserI__4CA06362" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

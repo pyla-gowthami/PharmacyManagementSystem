@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PharmacyManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Drugs">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrugName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ExpiryDate" Type="date" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="Supplier_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrugId" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Drug_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity_Ordered" Type="int" Nullable="false" />
+          <Property Name="Drug_Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Order_Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierInventory">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="SupplierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="User_Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Confirm Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Drugs__Supplier___46E78A0C">
+          <End Role="SupplierInventory" Type="Self.SupplierInventory" Multiplicity="1" />
+          <End Role="Drugs" Type="Self.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierInventory">
+              <PropertyRef Name="SupplierId" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="Supplier_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Det__DrugI__4BAC3F29">
+          <End Role="Drugs" Type="Self.Drugs" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drugs">
+              <PropertyRef Name="DrugId" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="DrugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Det__UserI__4CA06362">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PharmacyManagementSystemModelStoreContainer">
+          <EntitySet Name="Drugs" EntityType="Self.Drugs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierInventory" EntityType="Self.SupplierInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Drugs__Supplier___46E78A0C" Association="Self.FK__Drugs__Supplier___46E78A0C">
+            <End Role="SupplierInventory" EntitySet="SupplierInventory" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__DrugI__4BAC3F29" Association="Self.FK__Order_Det__DrugI__4BAC3F29">
+            <End Role="Drugs" EntitySet="Drugs" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__UserI__4CA06362" Association="Self.FK__Order_Det__UserI__4CA06362">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PharmacyManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrugName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="Supplier_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SupplierInventory" Relationship="Self.FK__Drugs__Supplier___46E78A0C" FromRole="Drugs" ToRole="SupplierInventory" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__DrugI__4BAC3F29" FromRole="Drugs" ToRole="Order_Details" />
+        </EntityType>
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrugId" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Drug_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity_Ordered" Type="Int32" Nullable="false" />
+          <Property Name="Drug_Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Order_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Drug" Relationship="Self.FK__Order_Det__DrugI__4BAC3F29" FromRole="Order_Details" ToRole="Drugs" />
+          <NavigationProperty Name="UserRegistration" Relationship="Self.FK__Order_Det__UserI__4CA06362" FromRole="Order_Details" ToRole="UserRegistration" />
+        </EntityType>
+        <EntityType Name="SupplierInventory">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="SupplierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SupplierEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Drugs" Relationship="Self.FK__Drugs__Supplier___46E78A0C" FromRole="SupplierInventory" ToRole="Drugs" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Confirm_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__UserI__4CA06362" FromRole="UserRegistration" ToRole="Order_Details" />
+        </EntityType>
+        <Association Name="FK__Drugs__Supplier___46E78A0C">
+          <End Role="SupplierInventory" Type="Self.SupplierInventory" Multiplicity="1" />
+          <End Role="Drugs" Type="Self.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierInventory">
+              <PropertyRef Name="SupplierId" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="Supplier_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Det__DrugI__4BAC3F29">
+          <End Role="Drugs" Type="Self.Drug" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drugs">
+              <PropertyRef Name="DrugId" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="DrugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Det__UserI__4CA06362">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PharmacyManagementSystemEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Drugs" EntityType="Self.Drug" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" />
+          <EntitySet Name="SupplierInventories" EntityType="Self.SupplierInventory" />
+          <EntitySet Name="UserRegistrations" EntityType="Self.UserRegistration" />
+          <AssociationSet Name="FK__Drugs__Supplier___46E78A0C" Association="Self.FK__Drugs__Supplier___46E78A0C">
+            <End Role="SupplierInventory" EntitySet="SupplierInventories" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__DrugI__4BAC3F29" Association="Self.FK__Order_Det__DrugI__4BAC3F29">
+            <End Role="Drugs" EntitySet="Drugs" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__UserI__4CA06362" Association="Self.FK__Order_Det__UserI__4CA06362">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PharmacyManagementSystemModelStoreContainer" CdmEntityContainer="PharmacyManagementSystemEntities3">
+          <EntitySetMapping Name="Drugs">
+            <EntityTypeMapping TypeName="PharmacyManagementSystemModel.Drug">
+              <MappingFragment StoreEntitySet="Drugs">
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Details">
+            <EntityTypeMapping TypeName="PharmacyManagementSystemModel.Order_Details">
+              <MappingFragment StoreEntitySet="Order_Details">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Drug_Name" ColumnName="Drug_Name" />
+                <ScalarProperty Name="Quantity_Ordered" ColumnName="Quantity_Ordered" />
+                <ScalarProperty Name="Drug_Price" ColumnName="Drug_Price" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierInventories">
+            <EntityTypeMapping TypeName="PharmacyManagementSystemModel.SupplierInventory">
+              <MappingFragment StoreEntitySet="SupplierInventory">
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="SupplierEmail" ColumnName="SupplierEmail" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRegistrations">
+            <EntityTypeMapping TypeName="PharmacyManagementSystemModel.UserRegistration">
+              <MappingFragment StoreEntitySet="UserRegistration">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Email" ColumnName="User_Email" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+                <ScalarProperty Name="Confirm_Password" ColumnName="Confirm Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

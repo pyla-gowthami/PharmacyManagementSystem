@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+}
+
+<body id="background">
+    <div class=" background-image"></div>
+
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+        }
+
+        #background {
+            background-image: url(/Pictures/amjd-rdwan-OQYv1-YZkZQ-unsplash.jpg);
+            background-position: inherit;
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 800px;
+            height: 500vh;
+        }
+    </style>
+    
+    <div style="padding-top: 55px;">
+
+        <h2 id="text_homePage"  align="center">
+            @Html.ActionLink("Click here to Login", "LoginUser")
+            <br/>
+            <br/>
+            <br/>
+            @Html.ActionLink("Click Here to Register", "Create")
+        </h2>
+    </div>
+</body>
+

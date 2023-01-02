@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+}
+
+<body id="background">
+    <div class=" background-image"></div>
+
+
+
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        #background {
+            background-image: url(/Pictures/img5.jpg);
+            background-position: inherit;
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 1000px;
+            height: 200vh;
+        }
+    </style>
+    </body>
+<body style="font-size:30px">
+
+    <center>
+
+
+
+    <div>
+        <h1>Pharmacy Management System</h1>
+    </div>
+    <div style="padding-top: 55px;">
+
+        <h2 id="text_homePage">
+            @Html.ActionLink("Login", "LoginUser") to use our services or @Html.ActionLink("Click Here to Register", "Create")
+        </h2>
+    </div>
+        </center>
+</body>
+
